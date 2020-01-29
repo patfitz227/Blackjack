@@ -3,13 +3,16 @@ import random
 
 # Asks user to start the game
 def main():
-    Start = input("Would you like to play a hand of blackjack? (Type Y for yes or N for no) :")
-    if Start.upper() == 'Y':
-        print('Yes')
-        continue_game()
-    else:
-
-        print("Thank you for stopping by!")
+    Start = ''
+    while Start.upper != 'N':
+        Start = input("Would you like to play a hand of blackjack? (Type Y for yes or N for no) :")
+        if Start.upper() == 'Y':
+            print('Yes')
+            continue_game()
+            break
+        elif Start.upper() == 'N':
+            print("Thank you for stopping by!")
+            break
 
 
 # Function to be called to deal cards individually
@@ -86,14 +89,14 @@ def compare_hands(handValue, dealerValue):
         print('Its a tie')
 
 
-# provides dealer hand with some logic for when to deal a third card will add functionality for more later
+# provides dealer hand with some logic in this case with a number under 13 the dealer automatically draws another card
 def dealer(dealerHand):
     dealerValue = count_cards(dealerHand)
     if dealerValue < 13:
         dealerHand.append(deal())
-        dealerValue = count_cards(dealerHand)
+        dealer(dealerHand)
 
-    dealerItems = [dealerValue,dealerHand]
+    dealerItems = [dealerValue, dealerHand]
     return dealerItems
 
 
